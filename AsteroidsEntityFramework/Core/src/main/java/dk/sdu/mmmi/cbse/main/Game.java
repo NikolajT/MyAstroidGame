@@ -10,6 +10,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.util.SPILocator;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.playersystem.PlayerControlSystem;
@@ -72,6 +73,9 @@ public class Game
         // Update
         for (IEntityProcessingService entityProcessorService : SPILocator.locateAll(IEntityProcessingService.class)) {
             entityProcessorService.process(gameData, world);
+        }
+        for (IPostEntityProcessingService postEntityProcessingService : SPILocator.locateAll(IPostEntityProcessingService.class)) {
+            postEntityProcessingService.process(gameData, world);
         }
     }
 

@@ -8,10 +8,6 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
-import java.util.Random;
-
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
-
 /**
  *
  * @author jcs
@@ -61,5 +57,4 @@ public class EnemyControlSystem implements IEntityProcessingService {
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
     }
-
 }

@@ -7,15 +7,10 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.sqrt;
+
+import static java.lang.Math.*;
 
 /**
- *
  * @author Alexander
  */
 public class MovingPart
@@ -60,7 +55,10 @@ public class MovingPart
     public void setUp(boolean up) {
         this.up = up;
     }
-
+    public void setSpeed(float speed) {
+        this.acceleration = speed;
+        this.maxSpeed = speed;
+    }
     @Override
     public void process(GameData gameData, Entity entity) {
         PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -99,16 +97,14 @@ public class MovingPart
         x += dx * dt;
         if (x > gameData.getDisplayWidth()) {
             x = 0;
-        }
-        else if (x < 0) {
+        } else if (x < 0) {
             x = gameData.getDisplayWidth();
         }
 
         y += dy * dt;
         if (y > gameData.getDisplayHeight()) {
             y = 0;
-        }
-        else if (y < 0) {
+        } else if (y < 0) {
             y = gameData.getDisplayHeight();
         }
 
