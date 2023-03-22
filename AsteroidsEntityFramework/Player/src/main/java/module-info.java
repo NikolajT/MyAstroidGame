@@ -8,5 +8,4 @@ module Player {
     requires CommonBullet;
     provides IEntityProcessingService with PlayerControlSystem;
     provides IGamePluginService with PlayerPlugin;
-
 }
