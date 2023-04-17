@@ -36,6 +36,7 @@ public class BulletControlSystem implements IEntityProcessingService, BulletSPI 
         }
     }
 
+    // My implementation of the BulletSPI interface
     @Override
     public Entity createBullet(Entity shooter, GameData gameData) {
         PositionPart shooterPos = shooter.getPart(PositionPart.class);
@@ -47,7 +48,7 @@ public class BulletControlSystem implements IEntityProcessingService, BulletSPI 
         float speed = 250;
 
         Entity bullet = new Bullet();
-        bullet.setRadius(2);
+        bullet.setRadius(7);
 
         float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
         float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
