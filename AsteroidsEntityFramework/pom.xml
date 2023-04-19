@@ -7,7 +7,6 @@
     <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MitAsteroidsNavnHer</name>
-
     <modules>
         <module>Core</module>
         <module>Player</module>
@@ -110,6 +109,12 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <!-- other configuration for the plugin -->
+                    </plugin>
+                    <plugin>
                         <artifactId>maven-clean-plugin</artifactId>
                         <version>3.2.0</version>
                         <configuration>
@@ -138,7 +143,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.0.2</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>copy-installed</id>

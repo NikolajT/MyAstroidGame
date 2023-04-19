@@ -26,10 +26,10 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
         float speed = 5;
         int life = otherLife.getLife() - 1;
         if (life == 1) {
-            radius = 6;
+            radius = 12;
             speed = (float) Math.random() * 30f + 70f;
         } else if (life == 2) {
-            radius = 10;
+            radius = 18;
             speed = (float) Math.random() * 10f + 50f;
         } else if (life <= 0) {
             world.removeEntity(e);
