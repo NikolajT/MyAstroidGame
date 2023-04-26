@@ -8,4 +8,5 @@ module Player {
     requires CommonBullet;
     provides IEntityProcessingService with PlayerControlSystem;
     provides IGamePluginService with PlayerPlugin;
+    uses dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
 }

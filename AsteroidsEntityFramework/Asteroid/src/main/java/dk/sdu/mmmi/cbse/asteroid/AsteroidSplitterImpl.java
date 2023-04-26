@@ -7,7 +7,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -26,10 +25,10 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
         float speed = 5;
         int life = otherLife.getLife() - 1;
         if (life == 1) {
-            radius = 12;
+            radius = 6;
             speed = (float) Math.random() * 30f + 70f;
         } else if (life == 2) {
-            radius = 18;
+            radius = 10;
             speed = (float) Math.random() * 10f + 50f;
         } else if (life <= 0) {
             world.removeEntity(e);

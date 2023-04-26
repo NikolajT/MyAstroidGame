@@ -11,7 +11,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.util.SPILocator;
+
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,10 +73,10 @@ public class Game
 
     private void update() {
         // Update
-        for (IEntityProcessingService entityProcessorService : SPILocator.locateAll(IEntityProcessingService.class)) {
+        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
             entityProcessorService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessingService : SPILocator.locateAll(IPostEntityProcessingService.class)) {
+        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
             postEntityProcessingService.process(gameData, world);
         }
     }

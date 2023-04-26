@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setTitle("Asteroids");
+		config.setTitle("MitAsteroids");
 		config.setWindowSizeLimits(1000,600,1000,600);
 
 		new Lwjgl3Application(new Game(), config);
