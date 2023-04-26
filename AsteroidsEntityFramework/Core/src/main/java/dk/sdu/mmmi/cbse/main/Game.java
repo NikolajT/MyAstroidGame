@@ -11,25 +11,34 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ServiceLoader;
 import static java.util.stream.Collectors.toList;
 
-public class Game
-        implements ApplicationListener {
+public class Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
-    private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
 
     private final GameData gameData = new GameData();
 
+    private final List<IGamePluginService> gamePluginServices;
+    private final List<IEntityProcessingService> entityProcessors;
+    private final List<IPostEntityProcessingService> postEntityProcessors;
     private World world = new World();
+
+    public Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessingService> entityProcessors, List<IPostEntityProcessingService> postEntityProcessors) {
+        this.gamePluginServices = gamePluginServices;
+        this.entityProcessors = entityProcessors;
+        this.postEntityProcessors = postEntityProcessors;
+    }
 
     @Override
     public void create() {
@@ -47,12 +56,10 @@ public class Game
                 new GameInputProcessor(gameData)
         );
 
-        IGamePluginService IGamePluginService;
-
-        for (IGamePluginService iGamePluginService : getPluginServices()) {
-        iGamePluginService.start(gameData, world);
+        // Lookup all Game Plugins using ServiceLoader
+        for (IGamePluginService iGamePlugin : gamePluginServices) {
+            iGamePlugin.start(gameData, world);
         }
-
     }
 
     @Override
@@ -73,11 +80,11 @@ public class Game
 
     private void update() {
         // Update
-        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
+        for (IEntityProcessingService entityProcessorService : entityProcessors) {
             entityProcessorService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
-            postEntityProcessingService.process(gameData, world);
+        for (IPostEntityProcessingService postEntityProcessorService : postEntityProcessors) {
+            postEntityProcessorService.process(gameData, world);
         }
     }
 
@@ -92,8 +99,8 @@ public class Game
             float[] shapey = entity.getShapeY();
 
             for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
+                 i < shapex.length;
+                 j = i++) {
 
                 sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
@@ -104,6 +111,7 @@ public class Game
 
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override
@@ -116,16 +124,5 @@ public class Game
 
     @Override
     public void dispose() {
-    }
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
