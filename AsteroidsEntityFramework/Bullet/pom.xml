@@ -6,7 +6,7 @@
     <parent>
         <groupId>dk.sdu.mmmi.cbse</groupId>
         <artifactId>MitAstroids</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>Bullet</artifactId>
     <properties>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>dk.sdu.mmmi.cbse</groupId>
         <artifactId>MitAstroids</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>Player</artifactId>
     <packaging>jar</packaging>
@@ -24,10 +24,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>CommonBullet</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
